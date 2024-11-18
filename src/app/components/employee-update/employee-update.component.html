@@ -1,0 +1,132 @@
+<div class="row">
+  <div class="col-sm-4"></div>
+  <div class="col-sm-4">
+    <form [formGroup]="updateForm" (ngSubmit)="onSubmit()">
+      <h2>Employee</h2>
+      <div class="mb-3 mt-3">
+        <label for="first-name">First Name </label>
+        <input
+          class="form-control"
+          id="first-name"
+          type="text"
+          formControlName="firstName"
+          required
+        />
+        <div
+          *ngIf="
+            updateFormControls['firstName'].invalid &&
+            (updateFormControls['firstName'].dirty ||
+              updateFormControls['firstName'].touched)
+          "
+          class="alert alert-danger"
+        >
+          <span *ngIf="updateFormControls['firstName'].errors?.['required']">
+            First Name is required.
+          </span>
+          <span *ngIf="updateFormControls['firstName'].errors?.['minlength']">
+            First Name must be at least 5 characters long.
+          </span>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="last-name">Last Name </label>
+        <input
+          class="form-control"
+          id="last-name"
+          type="text"
+          formControlName="lastName"
+        />
+      </div>
+      <div class="mb-3" formGroupName="department">
+        <label for="departmentId">Department</label>
+        <select
+          class="form-select"
+          formControlName="departmentId"
+          data-toggle="tooltip"
+          data-placement="right"
+          title="Select Employee Department"
+        >
+          <option [ngValue]="null" disabled>--Select Department--</option>
+          <option
+            *ngFor="let department of departments"
+            [ngValue]="department.departmentId"
+          >
+            {{ department.departmentName }}
+          </option>
+        </select>
+        <div
+          *ngIf="
+            departmentControls['departmentId'].invalid &&
+            (departmentControls['departmentId'].dirty ||
+              departmentControls['departmentId'].touched)
+          "
+          class="alert alert-danger"
+        >
+          <span *ngIf="departmentControls['departmentId'].errors?.['required']">
+            Select a department.
+          </span>
+        </div>
+      </div>
+      <div formGroupName="address">
+        <h2>Address</h2>
+        <div class="mb-3">
+          <label for="street">Street </label>
+          <input
+            class="form-control"
+            id="street"
+            type="text"
+            formControlName="street"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="city">City </label>
+          <input
+            class="form-control"
+            id="city"
+            type="text"
+            formControlName="city"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="state">State </label>
+          <input
+            class="form-control"
+            id="state"
+            type="text"
+            formControlName="state"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="country">Country </label>
+          <input
+            class="form-control"
+            id="country"
+            type="text"
+            formControlName="country"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="zipCode">Zip Code </label>
+          <input
+            class="form-control"
+            id="zipCode"
+            type="text"
+            formControlName="zipCode"
+          />
+        </div>
+      </div>
+      <button
+        class="btn btn-primary"
+        type="submit"
+        [disabled]="!updateForm.valid"
+      >
+        Submit
+      </button>
+    </form>
+  </div>
+  <div class="col-sm-4"></div>
+</div>

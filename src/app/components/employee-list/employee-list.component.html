@@ -1,0 +1,41 @@
+<div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Street</th>
+        <th>City</th>
+        <th>Zip Code</th>
+        <th>Country</th>
+        <th>Department</th>
+        <th>Delete</th>
+        <th>Update</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let e of employees">
+        <td>{{ e.id }}</td>
+        <td>{{ e.firstName }}</td>
+        <td>{{ e.lastName }}</td>
+        <td>{{ e.address?.street }}</td>
+        <td>{{ e.address?.city }}</td>
+        <td>{{ e.address?.zipCode }}</td>
+        <td>{{ e.address?.country }}</td>
+        <td>{{ e.department?.departmentName }}</td>
+        <td>
+          <a class="btn btn-danger" [routerLink]="['/employee-delete', e.id]">
+            Delete
+          </a>
+        </td>
+        <td>
+          <a class="btn btn-primary" [routerLink]="['/employee-update', e.id]">
+            Update
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<router-outlet></router-outlet>
